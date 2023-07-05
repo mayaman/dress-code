@@ -2,7 +2,8 @@
 * dress code
 * Maya Man (mayaontheinter.net)
 */
-let chars = ["♡", "ꔫ", "༶", "*", "✿", "✼", "☆", "𐐪𐑂", "✧", "❀", "✣", "୭", "✮", "𓏲", "❅", "✥", "✤", "❃", "✫", "✩", "✩"];
+let chars = ["❁", "༄ؘ", "♥", "୨୧", "＊", "༺", "♡", "ꔫ", "༶", "✿", "✼", "☆", "𐐪𐑂", "✧", "❀", "✣", "୭", "✮", "𓏲", "❅", "✥", "✤", "❃", "✫", "✩"];
+// let chars = ["༺♥༻"];
 let charArray = [];
 let gucciWords = [];
 
@@ -75,7 +76,6 @@ let adjectives = [
   "royal",
   "aluminum",
   "custom",
-  "crystal",
   "corseted",
   "minimalist",
   "equestrian-inspired",
@@ -83,10 +83,8 @@ let adjectives = [
   "unique",
   "heritage",
   "ephemeral",
-  "precious",
   "handcrafted",
   "exclusive",
-  "one-of-a-kind",
   "precious",
   "exquisite",
   "ultra-thin",
@@ -125,12 +123,152 @@ let adjectives = [
   "open-hearted",
   "recognizable",
   "exuberant",
-  "tactile"
+  "tactile",
+  "one-of-a-kind",
+  "airy",
+  "open-hearted",
+  "loving",
+  "exceptional",
+  "unstructured",
+  "voluminous",
+  "pleated",
+  "joyous",
+  "whimsical",
+  "fanciful",
+  "retro",
+  "kaleidoscopic",
+  "expressive",
+  "candid",
+  "high-contrast",
+  "radiant",
+  "metropolitan",
+  "coastal",
+  "wonderful",
+  "velvet",
+  "floral-printed",
+  "ruffle-trimmed",
+  "squiggle-bordered",
+  "legendary",
+  "historical",
+  "acclaimed",
+  "lasting",
+  "imaginative",
+  "bright",
+  "ready-to-wear",
+  "delicate",
+  "lightweight",
+  "limited-edition",
+  "dream-like",
+  "perfect",
+  "warm",
+  "magical",
+  "ethereal",
+  "joy-fuelled",
+  "glossy",
+  "romantic",
+  "decorative",
+  "powerful",
+  "oversize",
+  "timeless",
+  "embossed",
+  "oversized",
+  "embellished",
+  "distinctive",
+  "fluorescent",
+  "festive",
+  "satin",
+  "silk",
+  "suede",
+  "metallic",
+  "chunky",
+  "authentic",
+  "opulent",
+  "surreal",
+  "simple",
+  "unconventional",
+  "knitted",
+  "sheer",
+  "transparent",
+  "belted",
+  "hypnotizing",
+  "imaginary",
+  "shiny",
+  "crystal",
+  "textured",
+  "metal",
+  "tweed",
+  "mysterious",
+  "tailored",
+  "silver-toned",
+  "refined",
+  "multi-hued",
+  "light",
+  "fresh",
+  "tone-on-tone",
+  "ornate",
+  "lace",
+  "puffed",
+  "brushed",
+  "supple",
+  "geometric",
+  "symbolic",
+  "cinched",
+  "tulle",
+  "mythological",
+  "checked",
+  "ruffled",
+  "over-the-knee",
+  "mid-heel",
+  "all-natural",
+  "tweed",
+  "jacquard",
+  "georgette",
+  "iridescent",
+  "plush",
+  "patent",
+  "buckled",
+  "leather",
+  "studded",
+  "glitter",
+  "interlocking",
+  "detachable",
+  "evening",
+  "wool",
+  "sweet",
+  "striped",
+  "charmeuse",
+  "beaded",
+  "crêpe",
+  "pearl-embroidered",
+  "cashmere",
+  "patched",
+  "exotic",
+  "feminine",
+  "double-breasted",
+  "chiffon",
+  "hand-sewn",
+  "rose-tinted",
+  "demure",
+  "lurex",
+  "candy-colored",
+  "detailed",
+  "chic",
+  "irresistible",
+  "everyday",
+  "metaphorical",
+  "crystal-embroidered",
+  "luxury",
+  "updated",
+  "hand-painted"
 ];
 
-let adjChars = adjectives.concat(chars);
+console.log('num adjectives: ', adjectives.length);
+console.log('num chars: ', chars.length);
+
+let adjChars = adjectives.concat(chars).concat(chars).concat(chars).concat(chars).concat(chars).concat(chars);
 // let adjChars = chars;
 
+console.log(adjChars);
 let fonts = [
   "cursive"]
 
@@ -192,22 +330,6 @@ function draw() {
       image(currentPatch.pg, currentPatch.x, currentPatch.y, currentPatch.w, currentPatch.h);
     }
   }
-
-  // for (let w = 0; w < numWordsToShow; w++) {
-  //   let currentPatch = words[w];
-  //   currentPatch.draw();
-  //   image(currentPatch.pg, currentPatch.x, currentPatch.y, currentPatch.w, currentPatch.h);
-  // }
-
-  // for (let a = 0; a < appliques.length; a++) {
-  //   let currentApp = appliques[a];
-  //   currentApp.draw();
-  // }
-
-  // if (appliques[currentNumApp].isComplete()) {
-  //   appliques.push(new Applique(randChoice(adjectives), randChoice(girlblogger), randChoice(girlblogger), random(111, 444)));
-  //   currentNumApp = appliques.length - 1;
-  // }
 }
 
 function randomBool(chance) {
@@ -508,14 +630,13 @@ function randChoice(array) {
 }
 
 function mouseClicked() {
-  console.log("clicked!");
-  replacePatch();
+  // console.log("clicked!");
+  // replacePatch();
 }
 
 function replacePatch() {
   let patchIndex = Math.floor(Math.random() * patches.length);
   let randPatch = patches[patchIndex];
   randPatch.replace();
-  // layers[0].patches[patchIndex] = new Patch(randChoice(adjChars).toLowerCase(), randChoice(randChoice(colorOptions)), randPatch.x, randPatch.y, randPatch.w, randPatch.h);
 }
 

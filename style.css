@@ -8,13 +8,3 @@ canvas {
   position: relative;
   z-index: 1;
 }
-
-.affirmations {
-  position: absolute;
-  z-index: 0;
-  font-size: 22px;
-  font-style: italic;
-  bottom: 22px;
-  right: 22px;
-  width: 50%;
-}
