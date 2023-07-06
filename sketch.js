@@ -262,16 +262,13 @@ let adjectives = [
   "hand-painted"
 ];
 
-console.log('num adjectives: ', adjectives.length);
-console.log('num chars: ', chars.length);
+console.log("https://www.tiktok.com/@charlidamelio/video/6927448387004419333")
 
 let adjChars = adjectives.concat(chars).concat(chars).concat(chars).concat(chars).concat(chars).concat(chars);
 // let adjChars = chars;
 
-console.log(adjChars);
 let fonts = [
   "cursive"]
-
 
 let backgroundColorString = '#D7D8C3';
 let words = [];
@@ -290,7 +287,7 @@ function setup() {
   textFont("cursive");
   resetPatchwork();
 
-  appliques.push(new Applique(randChoice(adjectives), randChoice(girlblogger), randChoice(girlblogger)));
+  // appliques.push(new Applique(randChoice(adjectives), randChoice(girlblogger), randChoice(girlblogger)));
 
   smooth();
   noStroke();
@@ -306,22 +303,11 @@ function draw() {
       replacePatch();
     } else {
       resetPatchwork();
+      console.log(randChoice(adjectives) + "!");
     }
+
     timer = millis();
   }
-
-  // if (frameCount % 60 == 0) {
-  //   numWordsToShow++;
-
-  //   if (numWordsToShow > words.length) {
-  //     resetPatchwork();
-  //     numWordsToShow = 0;
-  //   }
-  // }
-
-  // for (let l = 0; l < layers.length; l++) {
-  //   layers[l].draw();
-  // }
 
   for (let p = 0; p < patches.length; p++) {
     let currentPatch = patches[p];
@@ -335,99 +321,6 @@ function draw() {
 function randomBool(chance) {
   return (Math.random() >= chance);
 }
-
-
-class Applique {
-  constructor(aText, aFill, aStroke) {
-    this.text = aText;
-    this.fill = aFill;
-    this.stroke = aStroke;
-    this.size = random(111, 222);
-    this.x = random(width / 2);
-    this.y = random(height / 2);
-    this.counter = 0;
-    this.currentCharIndex = 0;
-    this.complete = false;
-    this.deleting = false;
-    this.font = randChoice(fonts);
-    this.fin = false;
-  }
-
-  draw() {
-    textSize(this.size);
-    // fill(this.fill);
-    // stroke(this.stroke);
-
-    fill(255);
-    // textStyle(BOLD);
-    stroke(0);
-    strokeWeight(10);
-    strokeJoin(ROUND);
-    textFont("serif");
-    textAlign(LEFT, CENTER);
-    text(this.text.substr(0, this.currentCharIndex).toUpperCase(), this.x, this.y);
-
-    if (!this.complete) {
-      this.counter++;
-      if (this.counter % 10 == 0) {
-        this.currentCharIndex++;
-        if (this.currentCharIndex >= this.text.length + 10) {
-          this.complete = true;
-          this.deleting = true;
-        }
-      }
-    } else if (this.complete && this.deleting) {
-      this.counter++;
-      if (this.counter % 10 == 0) {
-        this.currentCharIndex--;
-        if (this.currentCharIndex <= 0) {
-          this.deleting = false;
-          this.fin = true;
-        }
-      }
-    } else if (this.fin) {
-      this.complete = false;
-      this.fin = false;
-      this.text = randChoice(adjectives);
-      this.x = random(width / 2);
-      this.y = random(height / 2);
-      this.currentCharIndex = 0;
-    }
-
-  }
-
-  isComplete() {
-    return this.complete;
-  }
-}
-
-// class Layer {
-//   constructor(patches) {
-//     this.patches = patches;
-//     this.numPatchesToShow = 0;
-//     this.offset = 0;
-//     this.rate = random(1, 10);
-//     this.currentScale = 1;
-//   }
-
-//   draw() {
-//     if (frameCount % 60 == 0) {
-//       this.numPatchesToShow++;
-
-//     }
-
-//     this.offset++;
-//     this.currentScale -= 0.001;
-//     for (let p = 0; p < this.patches.length; p++) {
-//       let currentPatch = this.patches[p];
-//       currentPatch.draw();
-//       if (currentPatch.pg) {
-//         image(currentPatch.pg, currentPatch.x, currentPatch.y, currentPatch.w, currentPatch.h);
-//       }
-//     }
-//   }
-// }
-
 
 class Patch {
   constructor(wText, wColor, posX, posY, pW, pH) {
@@ -526,6 +419,10 @@ class Patch {
     this.opacity = 255;
   }
 
+  removeGraphic() {
+    this.pg.remove();
+  }
+
   replace() {
     this.calculateSize();
     this.text = randChoice(adjChars).toLowerCase();
@@ -534,7 +431,6 @@ class Patch {
     this.g = green(this.color);
     this.b = blue(this.color);
     this.randomBackground = color(randChoice(backgroundColors));
-    // this.randomBackground = color('#FAEDEF');
     while (colorsEqual(this.color, this.randomBackground)) {
       this.randomBackground = color(randChoice(backgroundColors));
     }
@@ -563,6 +459,11 @@ function resetPatchwork() {
   maxHeight = determineMaxHeight();
   let newH = minHeight + Math.random() * maxHeight;
 
+  // Remove patches currently
+  for (let p = 0; p < patches.length; p++) {
+    let currentPatch = patches[p];
+    currentPatch.removeGraphic();
+  }
 
   patches = [];
   while (currentH < height) {
@@ -575,8 +476,6 @@ function resetPatchwork() {
         last = true;
       }
       patches.push(new Patch(randChoice(adjChars).toLowerCase(), color(randChoice(randChoice(colorOptions))), currentW, currentH, newW, newH));
-      // patches.push(new Patch(randChoice(adjChars).toLowerCase(), color('#FAEDEF'), currentW, currentH, newW, newH));
-
       if (last) {
         currentW += newW;
 
@@ -589,9 +488,6 @@ function resetPatchwork() {
     maxHeight = determineMaxHeight();
     newH = minHeight + Math.random() * maxHeight;
   }
-
-  // layers[0] = new Layer(patches);
-  // layers.push(new Layer(patches));
 }
 
 function determineMaxWidth() {
@@ -627,11 +523,6 @@ function windowResized() {
 
 function randChoice(array) {
   return array[Math.floor(Math.random() * array.length)];
-}
-
-function mouseClicked() {
-  // console.log("clicked!");
-  // replacePatch();
 }
 
 function replacePatch() {
